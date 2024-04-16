@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ProductTypeService {
@@ -17,8 +19,13 @@ public class ProductTypeService {
         return productTypeRepository.save(productType);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<ProductType> findById(Long id) {
+        return productTypeRepository.findById(id);
+    }
+
     @Transactional
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         productTypeRepository.deleteById(id);
     }
 
